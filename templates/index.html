@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API Key Generator</title>
+    <style>
+        body {
+            background-color: #0f0f0f;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        h1 { color: #00ff88; }
+        button {
+            background-color: #00ff88;
+            color: #0f0f0f;
+            border: none;
+            padding: 15px 30px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 20px;
+        }
+        button:hover { background-color: #00cc66; }
+        #api-key-box {
+            margin-top: 30px;
+            background-color: #1a1a1a;
+            padding: 20px 40px;
+            border-radius: 8px;
+            font-size: 20px;
+            color: #00ff88;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>🔑 API Key Generator</h1>
+    <p>Click the button to generate your unique API key</p>
+
+    <button onclick="generateKey()">Generate API Key</button>
+
+    <div id="api-key-box">
+        <span id="key-text"></span>
+    </div>
+
+    <script>
+        async function generateKey() {
+            const response = await fetch("/generate", {method: "POST"});
+            const data = await response.json();
+            document.getElementById("key-text").innerText = data.api_key;
+            document.getElementById("api-key-box").style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
